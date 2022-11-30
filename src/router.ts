@@ -4,6 +4,7 @@ export const PAGE_MAIN: string = '/';
 export const PAGE_USERS: string = '/users';
 export const PAGE_AUTH: string = '/auth';
 export const PAGE_DOCUMENTS: string = '/documents'
+export const PAGE_FTP: string = '/ftp'
 // endregion
 
 // region PANELS
@@ -11,6 +12,7 @@ export const PANEL_MAIN: string = 'panel_main';
 export const PANEL_USERS: string = 'panel_users';
 export const PANEL_AUTH: string = 'panel_auth';
 export const PANEL_DOCUMENTS: string = 'panel_documents';
+export const PANEL_FTP: string = 'panel_ftp';
 // endregion
 
 // region MODALS
@@ -40,7 +42,8 @@ const routes = {
   [PAGE_MAIN]: new Page(PANEL_MAIN, VIEW_MAIN),
   [PAGE_USERS]: new Page(PANEL_USERS, VIEW_MAIN),
   [PAGE_AUTH]: new Page(PANEL_AUTH, VIEW_MAIN),
-  [PAGE_DOCUMENTS]: new Page(PANEL_DOCUMENTS, VIEW_MAIN)
+  [PAGE_DOCUMENTS]: new Page(PANEL_DOCUMENTS, VIEW_MAIN),
+  [PAGE_FTP]: new Page(PANEL_FTP, VIEW_MAIN),
 
 
 }
