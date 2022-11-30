@@ -1,0 +1,11 @@
+<Panel>
+    <Div>
+      <FormLayout>
+        <FormItem>
+  <Button size="l"  stretched onClick={() =>setIsAuth(false)} disabled={login.length === 0 && password.length === 0} style={{backgroundColor: '#54ad31', width: '31%', marginLeft: '30.5%'}}>
+    Войти
+  </Button>
+          </FormItem>
+        </FormLayout>
+     </Div>
+  </Panel>
