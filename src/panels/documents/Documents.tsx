@@ -14,9 +14,9 @@ const Documents = ({id}: IPanel): JSX.Element => {
     const [documents, setDocuments] = useState<DocumentsAttributes[]>();
     const router = useRouter();
     const getDocuments = async () => {
-        await fetch(`http://localhost:4000/api/documents`, {
+        await fetch(`http://krbackendAC.sbut0ca.repl.co/api/documents`, {
             method: 'GET',
-            mode: 'cors',
+            mode: 'no-cors',
             headers: {
                 'Content-Type': 'application/json'
             },

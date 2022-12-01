@@ -11,7 +11,7 @@ const FTPls = ({id}: IPanel): JSX.Element => {
       const fd = new FormData()
       fd.append('file', e.target.files[0])
       fd.append('path', currentPath)
-   await fetch(`http://localhost:4000/api/ftp/upload`, {
+   await fetch(`https://krbackendAC.sbut0ca.repl.co/api/ftp/upload`, {
           method: 'post',
               mode: 'cors',
                body: fd
@@ -22,7 +22,7 @@ const FTPls = ({id}: IPanel): JSX.Element => {
     const [file, setFile] = useState();
   const [currentPath, setCurrentPath] = useState('./')
   const getLs = async (path = './') => {
-    await fetch(`http://localhost:4000/api/ftp/ls`, {
+    await fetch(`https://krbackendAC.sbut0ca.repl.co/api/ftp/ls`, {
       method: 'post',
       mode: 'cors',
       headers: {
@@ -37,9 +37,9 @@ const FTPls = ({id}: IPanel): JSX.Element => {
       });
   }
   const download = async (path: string, name: string) => {
-    await fetch(`http://localhost:4000/api/ftp/download`, {
+    await fetch(`http://krbackendAC.sbut0ca.repl.co/api/ftp/download`, {
       method: 'post',
-      mode: 'cors',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json'
       },
