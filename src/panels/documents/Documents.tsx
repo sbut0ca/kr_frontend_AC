@@ -11,10 +11,10 @@ import {DocumentsAttributes} from "../../interfaces/DocumentsAttributes";
 
 
 const Documents = ({id}: IPanel): JSX.Element => {
-    const [documents, setDocuments] = useState<DocumentsAttributes>();
+    const [documents, setDocuments] = useState<DocumentsAttributes[]>();
     const router = useRouter();
     const getDocuments = async () => {
-        await fetch(`http://localhost:4000/auth`, {
+        await fetch(`http://localhost:4000/api/documents`, {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -42,12 +42,12 @@ const Documents = ({id}: IPanel): JSX.Element => {
             >
                 Результаты
             </PanelHeader>
-            {documents &&
+            {documents && documents.map(document =>
                 <Div className={'results__data'}>
-                    <Text>{`${documents.DocumentName} ${documents.DocumentCode} ${documents.DocumentType}`}</Text>
+                    <Text>{`${document.DocumentName} ${document.DocumentCode} ${document.DocumentType}`}</Text>
 
                 </Div>
-            }
+            )}
         </Panel>
     );
 };

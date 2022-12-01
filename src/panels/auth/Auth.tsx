@@ -4,8 +4,7 @@ import { IPanel } from 'interfaces/IPanel';
 import { useRouter } from "@happysanta/router";
 import {
     MODAL_AUTH_DECLINE,
-    MODAL_AUTH_SUCCESS, PAGE_DOCUMENTS,
-    PAGE_MAIN
+    MODAL_AUTH_SUCCESS, PAGE_DOCUMENTS, PAGE_FTP,
 } from './../../router'
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -31,7 +30,7 @@ const Auth = ({id}: IPanel): JSX.Element => {
     if (data.ok) {
       const res = await data.json();
       setIsAuth(res);
-      router.replacePage(PAGE_DOCUMENTS);
+      router.replacePage(PAGE_FTP);
       router.pushModal(MODAL_AUTH_SUCCESS);
     }
     else {
@@ -78,7 +77,7 @@ const Auth = ({id}: IPanel): JSX.Element => {
                 />
               </FormItem>
               <FormItem>
-                <Button size="l"  stretched onClick={auth} disabled={login.length === 0 && password.length === 0} style={{backgroundColor: '#54ad32', width: '31%', marginLeft: '30.5%'}}>
+                <Button size="l"  stretched onClick={auth} disabled={login.length === 0 && password.length === 0} style={{backgroundColor: '#54adec', width: '31%', marginLeft: '30.5%'}}>
                   Войти
                 </Button>
               </FormItem>

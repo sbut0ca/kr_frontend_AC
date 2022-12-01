@@ -7,7 +7,7 @@ import {
   AppRoot,
   ConfigProvider,
   SplitLayout,
-  SplitCol, usePlatform, Root, Button, Panel, PanelHeader, Div, Text, FormLayout, FormItem, Input,
+  SplitCol, usePlatform, Root, Button, Panel, PanelHeader, Div, Text, FormLayout, FormItem, Input, SimpleCell,
 } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 
@@ -15,12 +15,11 @@ import '@vkontakte/vkui/dist/vkui.css';
 import {
 
 
-  PANEL_MAIN,
   PANEL_AUTH,
   PAGE_AUTH,
   VIEW_MAIN,
   VIEW_ONBOARDING,
-  PANEL_USERS, PANEL_DOCUMENTS, PAGE_DOCUMENTS
+  PANEL_DOCUMENTS, PAGE_DOCUMENTS, PANEL_FTP
 } from './router'
 
 
@@ -31,6 +30,8 @@ import {AppearanceType} from '@vkontakte/vk-bridge';
 import './App.css';
 import { useLocalStorage } from 'usehooks-ts';
 import Documents from "./panels/documents/Documents";
+import {Icon28ChevronLeftOutline} from "@vkontakte/icons";
+import FTPls from "./panels/ftp/FTPls";
 // import Users from "./panels/user/Users";
 // import User from "./panels/user/User";
 
@@ -38,6 +39,7 @@ const App = (): JSX.Element => {
   const [appearance, setAppearance] = useState(null)
   const [isAuth,] = useLocalStorage('isAuth', false)
   const [,setIsAuth] = useLocalStorage('isAuth', false)
+  const [currentPath, setCurrentPath] = useState('./')
 
   const router = useRouter();
   const location = useLocation();
@@ -76,6 +78,8 @@ const App = (): JSX.Element => {
   }, [isAuth])
 
 
+
+
   return (
     <ConfigProvider appearance={appearance as AppearanceType} platform={platform}>
       <AdaptivityProvider>
@@ -90,6 +94,8 @@ const App = (): JSX.Element => {
                 >
 
                   <Auth id={PANEL_AUTH}/>
+                  <Documents id={PANEL_DOCUMENTS}/>
+                  <FTPls id={PANEL_FTP}/>
 
 
                 </View>

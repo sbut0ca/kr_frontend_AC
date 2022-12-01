@@ -1,12 +1,25 @@
 import React, {useEffect, useState} from 'react';
 import {IPanel} from '../../interfaces/IPanel';
-import {Div, Panel, PanelHeader, SimpleCell} from '@vkontakte/vkui';
-import {Icon28ChevronLeftOutline} from '@vkontakte/icons';
+import {Button, Div, Panel, PanelHeader, SimpleCell, Text, FormItem, File} from '@vkontakte/vkui';
+import {Icon24Document, Icon28ChevronLeftOutline} from '@vkontakte/icons';
 import {useRouter} from '@happysanta/router';
 
 const FTPls = ({id}: IPanel): JSX.Element => {
   const router = useRouter();
   const [ls, setLs] = useState<any>();
+  const uploadFile = async (e:any) => {
+      const fd = new FormData()
+      fd.append('file', e.target.files[0])
+      fd.append('path', currentPath)
+   await fetch(`http://localhost:4000/api/ftp/upload`, {
+          method: 'post',
+              mode: 'cors',
+               body: fd
+      }).then( () => {
+          getLs(currentPath)
+   })
+  }
+    const [file, setFile] = useState();
   const [currentPath, setCurrentPath] = useState('./')
   const getLs = async (path = './') => {
     await fetch(`http://localhost:4000/api/ftp/ls`, {
@@ -54,6 +67,8 @@ const FTPls = ({id}: IPanel): JSX.Element => {
         link.parentNode.removeChild(link);
       });
   }
+
+
   useEffect(() => {
 
     getLs()
@@ -68,8 +83,34 @@ const FTPls = ({id}: IPanel): JSX.Element => {
         FTP
       </PanelHeader>
       <Div>
+
+
+
+
+
+          <FormItem top="Загрузите документы">
+              <File onChange = {uploadFile}
+                  before={<Icon24Document role="presentation" />}
+                  size="l"
+                  mode="secondary"
+              />
+          </FormItem>
+
+          <h1>Реестр документов</h1>
+          <Button onClick={() =>{
+              getLs()
+              setCurrentPath(`./`)
+
+          }}>
+
+              Вернуться в корень
+          </Button>
         {ls && ls.map((item: any, index: number) =>
-          <SimpleCell key={index} onClick={() => {
+          <SimpleCell after={
+              <Button>
+                  Удалить
+              </Button>
+          } onClick={() => {
             if (item.type === 'd') {
               getLs(`${currentPath}/${item.name}`)
               setCurrentPath(prevState => prevState+`${item.name}/`)
@@ -79,8 +120,10 @@ const FTPls = ({id}: IPanel): JSX.Element => {
             }
           }}>
             {item.name} : {item.type === 'd' ? 'Директория' : 'Файл'}
+
           </SimpleCell>
         )}
+
       </Div>
     </Panel>
   );
